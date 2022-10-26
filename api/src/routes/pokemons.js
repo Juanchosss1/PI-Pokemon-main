@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { Pokemons } = require("../db.js");
+const Types = require("../models/Types.js");
 const {
   getPokemonsDb,
   getPokemonsApi,
@@ -39,14 +40,14 @@ router.get("/", async (req, res) => {
   } else {
     try {
       let allPoke = await allPokemons();
-      let pokemonsForHome = allPoke.map((e) => {
-        return {
-          name: e.name,
-          type: e.type,
-          img: e.img,
-        };
-      });
-      res.status(200).json(pokemonsForHome);
+      // let pokemonsForHome = allPoke.map((e) => {
+      //   return {
+      //     name: e.name,
+      //     type: e.type,
+      //     img: e.img,
+      //   };
+      // });
+      res.status(200).json(/*pokemonsForHome*/allPoke);
     } catch (err) {
       console.log(err); //crear componente de;
     }
@@ -64,9 +65,9 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { name, life, atack, defense, speed, height, weight } = req.body;
+  const { name, life, atack, defense, speed, height, weight, type } = req.body;
   if (!name) {
-    return res.status(404).send("Falta enviar datos obligatorios");
+    return res.status(404).send("You should enter a name");
   }
   try {
     const pokemonCreate = await Pokemons.create({
@@ -78,6 +79,12 @@ router.post("/", async (req, res) => {
       height: height,
       weight: weight,
     });
+
+    let pokemonTypesDb = await Types.findAll({
+      where: {name: type}
+    
+    })
+    pokemonCreate.addTypes(pokemonTypesDb)
     res.status(201).json(pokemonCreate.toJSON());
   } catch (err) {
     return res.status(401).send("Error en alguno de los datos provistos");

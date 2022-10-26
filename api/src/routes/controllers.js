@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 
 async function getPokemonsDb() {
   let pokemonsDb = await Pokemons.findAll({
+    attributes:['id','name','img'],
     include: {
       model: Types,
       attributes: ["id", "name"],
@@ -26,12 +27,12 @@ async function getPokemonsApi() {
     const url = await axios(pokemonUrl[i]);
     arrayPokemons.push({
       name: url.data.name,
-      height: url.data.height,
-      weight: url.data.weight,
-      life: url.data.stats[0].base_stat,
-      atack: url.data.stats[1].base_stat,
-      defense: url.data.stats[2].base_stat,
-      speed: url.data.stats[5].base_stat,
+      // height: url.data.height,
+      // weight: url.data.weight,
+      // life: url.data.stats[0].base_stat,
+      // atack: url.data.stats[1].base_stat,
+      // defense: url.data.stats[2].base_stat,
+      // speed: url.data.stats[5].base_stat,
       type: url.data.types.map((e) => e.type.name),
       img: url.data.sprites.front_default,
     });
@@ -122,8 +123,29 @@ async function getPokemonById(id) {
 }
 
 async function getPokemonTypes() {
-  const pokemonTypes = await axios("https://pokeapi.co/api/v2/type");
-  let pokemonTypesMap = pokemonTypes.data.results.map((e) => e.name);
+  const pokemonTypesApi = await axios("https://pokeapi.co/api/v2/type");
+  let pokemonTypes = pokemonTypesApi.data.results.map((e) =>{return {name:e.name}} );
+ 
+  await Types.bulkCreate(pokemonTypes)
+
+  let pokemonsTypesDb = await Types.findAll({
+    attributes: ['id','name']
+});
+
+  return pokemonsTypesDb         
+
+//   let pokemonsDb = await Pokemons.findAll({
+//     include: {
+//       model: Types,
+//       attributes: ["id", "name"],
+//       //   through: {
+//       //     attributes: [],
+//       //   },
+//     },
+//   });
+//   return pokemonsDb;
+// }
+
 }
 
 module.exports = {
@@ -133,4 +155,5 @@ module.exports = {
   getPokemonById,
   getPokemonByNameApi,
   getPokemonByNameDbOrApi,
+  getPokemonTypes,
 };

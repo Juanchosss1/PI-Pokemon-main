@@ -6,19 +6,17 @@ module.exports = (sequelize) => {
   sequelize.define(
     "types",
     {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        allowNull: false,
-      },
-
+      
       name: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
       },
     },
     {
-      timestamps: false,
+      timestamps: true,
+        createdAt: false,
+        updatedAt: 'actualizado'
     }
   );
 };
