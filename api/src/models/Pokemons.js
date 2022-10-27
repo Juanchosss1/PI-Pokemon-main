@@ -21,21 +21,27 @@ module.exports = (sequelize) => {
 
       life: {
         type: DataTypes.INTEGER,
+        defaultValue: 100,
       },
       attack: {
         type: DataTypes.INTEGER,
+        defaultValue: 100,
       },
       defense: {
         type: DataTypes.INTEGER,
+        defaultValue: 100,
       },
       speed: {
         type: DataTypes.INTEGER,
+        defaultValue: 100,
       },
       height: {
         type: DataTypes.INTEGER,
+        defaultValue: 100,
       },
       weight: {
         type: DataTypes.INTEGER,
+        defaultValue: 100,
       },
       img: {
         type: DataTypes.TEXT,

@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 
 async function getPokemonsDb() {
   let pokemonsDb = await Pokemons.findAll({
-    attributes:['id','name','img'],
+    attributes: ["id", "name", "img"],
     include: {
       model: Types,
       attributes: ["id", "name"],
@@ -95,7 +95,7 @@ async function getPokemonByNameDbOrApi(value) {
       model: Types,
       attributes: ["id", "name"],
       through: {
-        PokemonsTypes: [], //investigar
+        attributes: [], //investigar
       },
     },
   });
@@ -122,30 +122,64 @@ async function getPokemonById(id) {
   }
 }
 
+async function createPokemon(
+  name,
+  life,
+  attack,
+  defense,
+  speed,
+  height,
+  weight,
+  type,
+  img,
+  createDb
+) {
+  try {
+    let existInApi = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`
+    );
+
+    if (existInApi)
+      return `The pokemon "${name} already exist, try another name"`;
+  } catch (poke) {
+    const pokemonCreate = await Pokemons.create({
+      name: name.toLowerCase(),
+      life: life,
+      attack: attack,
+      defense: defense,
+      speed: speed,
+      height: height,
+      weight: weight,
+      img: img,
+      createDb: createDb,
+    });
+
+    await getPokemonTypes();
+
+    let typesDb = await Types.findAll({
+      where: { name: type },
+      include: Pokemons,
+    });
+
+    await pokemonCreate.addTypes(typesDb);
+    //si o si hay q elegir un tipo de pokeweon
+    return pokemonCreate;
+  }
+}
+
 async function getPokemonTypes() {
   const pokemonTypesApi = await axios("https://pokeapi.co/api/v2/type");
-  let pokemonTypes = pokemonTypesApi.data.results.map((e) =>{return {name:e.name}} );
- 
-  await Types.bulkCreate(pokemonTypes)
+  let pokemonTypes = pokemonTypesApi.data.results.map((e) => {
+    return { name: e.name };
+  });
+
+  await Types.bulkCreate(pokemonTypes);
 
   let pokemonsTypesDb = await Types.findAll({
-    attributes: ['id','name']
-});
+    attributes: ["id", "name"],
+  });
 
-  return pokemonsTypesDb         
-
-//   let pokemonsDb = await Pokemons.findAll({
-//     include: {
-//       model: Types,
-//       attributes: ["id", "name"],
-//       //   through: {
-//       //     attributes: [],
-//       //   },
-//     },
-//   });
-//   return pokemonsDb;
-// }
-
+  return pokemonsTypesDb;
 }
 
 module.exports = {
@@ -156,4 +190,5 @@ module.exports = {
   getPokemonByNameApi,
   getPokemonByNameDbOrApi,
   getPokemonTypes,
+  createPokemon,
 };

@@ -6,17 +6,15 @@ module.exports = (sequelize) => {
   sequelize.define(
     "types",
     {
-      
       name: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false,
       },
     },
     {
-      timestamps: true,
-        createdAt: false,
-        updatedAt: 'actualizado'
+      timestamps: false,
+      createdAt: false,
+      updatedAt: "actualizado",
     }
   );
 };
