@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_POKEMONS } from "./actionTypes";
+import { GET_ALL_POKEMONS, SEARCH_BY_NAME } from "./actionTypes";
 
 export function getAllPokemons() {
   return async function (dispatch) {
@@ -9,4 +9,16 @@ export function getAllPokemons() {
       payload: json.data,
     });
   };
+}
+
+export function searchPokemon(value){
+  return async function(dispatch){
+    let json = await axios.get(`http://localhost:3001/pokemons/${value}`);
+    let arr=[]
+    arr.push(json.data)
+    return dispatch({
+      type: SEARCH_BY_NAME,
+      payload: arr,
+  })
+}
 }

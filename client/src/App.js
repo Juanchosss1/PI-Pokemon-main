@@ -9,8 +9,8 @@ function App() {
       <h1>Henry Pokemon</h1>
       <BrowserRouter>
         <Route exact path={"/"} component={LandingPage} />
-        <Route exact path={"/home"} component={Home} />
         <Route path={"/home"} component={NavBar} />
+        <Route exact path={"/home"} component={Home} />
         <Route />
       </BrowserRouter>
     </div>

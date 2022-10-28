@@ -1,1 +1,2 @@
 export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS";
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME"

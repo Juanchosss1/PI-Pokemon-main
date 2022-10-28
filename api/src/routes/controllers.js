@@ -17,6 +17,35 @@ async function getPokemonsDb() {
 }
 
 async function getPokemonsApi() {
+
+const arrayPokemons = []
+const firstCallPokeApi = await axios("https://pokeapi.co/api/v2/pokemon");
+const secondCallPokeApi = await axios(firstCallPokeApi.data.next);
+
+const firstPokemonUrl = firstCallPokeApi.data.results.map((e) => e.url)
+const secondPokemonUrl = secondCallPokeApi.data.results.map((e) => e.url)
+
+const allPokemonUrl = firstPokemonUrl.concat(secondPokemonUrl)
+const allPokemonsPromises = await Promise.all(allPokemonUrl)
+
+for (i = 0; i < allPokemonsPromises.length; i++) {
+  const url = await axios(allPokemonUrl[i]);
+  arrayPokemons.push({
+    name: url.data.name,
+    // height: url.data.height,
+    // weight: url.data.weight,
+    // life: url.data.stats[0].base_stat,
+    // atack: url.data.stats[1].base_stat,
+    // defense: url.data.stats[2].base_stat,
+    // speed: url.data.stats[5].base_stat,
+    types: url.data.types.map((e) => e.type.name),
+    img: url.data.sprites.front_default,
+  });
+}
+
+return arrayPokemons;
+
+/*
   const pokemonsUrlApi = await axios(
     "https://pokeapi.co/api/v2/pokemon?offset=0&limit=5"
   );
@@ -39,6 +68,8 @@ async function getPokemonsApi() {
   }
 
   return arrayPokemons;
+
+  */
 }
 
 async function allPokemons() {
@@ -58,7 +89,7 @@ async function getPokemonByNameApi(value) {
     let pokemonDetailsApi = {
       id: getPokemon.data.id,
       name: getPokemon.data.name,
-      type: getPokemon.data.types.map((e) => e.type.name),
+      types: getPokemon.data.types.map((e) => e.type.name),
       img: getPokemon.data.sprites.front_default,
       life: getPokemon.data.stats[0].base_stat,
       atack: getPokemon.data.stats[1].base_stat,
