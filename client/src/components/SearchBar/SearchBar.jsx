@@ -23,10 +23,13 @@ const SearchBar = () => {
 
   return (
     <div>SearchBar
+        <form onSubmit={handleSubmit}>
         <input type='text' placeholder='Search Pokemon!' value={name} onChange={(e) => handleInput(e)}/>
-        <button type='submit' onClick={(e) => handleSubmit(e)}>Search!</button>
+        <button type='submit'>Search!</button>
+        </form>
     </div>
   )
 }
+//<button type='submit' onClick={(e) => handleSubmit(e)}>Search!</button>
 
 export default SearchBar

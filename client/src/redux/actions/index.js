@@ -4,6 +4,7 @@ import {
   SEARCH_BY_NAME,
   GET_DETAILS,
   CREATE_POKEMON,
+  GET_TYPES,
 } from "./actionTypes";
 
 export function getAllPokemons() {
@@ -15,6 +16,21 @@ export function getAllPokemons() {
     });
   };
 }
+
+export function getTypes(){
+  return async function(dispatch){
+    try{
+      let json = await axios.get(`http://localhost:3001/types`);
+      return dispatch({
+        type: GET_TYPES,
+        payload: json.data
+      })
+    }catch(err){
+      window.alert(err.response.data);
+    }
+  }
+}
+
 
 export function searchPokemon(value) {
   return async function (dispatch) {
@@ -40,7 +56,9 @@ export function getDetails(value) {
         type: GET_DETAILS,
         payload: json.data,
       });
-    } catch (err) {}
+    } catch (err) {
+     window.alert(err.response.data);
+    }
   };
 }
 
@@ -61,3 +79,4 @@ export function createPokemon(payload) {
     }
   };
 }
+

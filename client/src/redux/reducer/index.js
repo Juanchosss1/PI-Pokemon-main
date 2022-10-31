@@ -3,12 +3,14 @@ import {
   CREATE_POKEMON,
   GET_ALL_POKEMONS,
   GET_DETAILS,
+  GET_TYPES,
   SEARCH_BY_NAME,
 } from "../actions/actionTypes";
 const initialState = {
   allPokemons: [],
   pokemon: [],
   pokemonDetails: {},
+  types:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -41,6 +43,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+    }
+    case GET_TYPES:{
+      return{
+        ...state,
+      types: action.payload
+      }
     }
 
     default:
