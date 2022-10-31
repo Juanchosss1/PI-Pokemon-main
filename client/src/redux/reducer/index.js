@@ -1,7 +1,14 @@
-import { GET_ALL_POKEMONS, SEARCH_BY_NAME } from "../actions/actionTypes";
+import {
+  CLEAR_PAGE,
+  CREATE_POKEMON,
+  GET_ALL_POKEMONS,
+  GET_DETAILS,
+  SEARCH_BY_NAME,
+} from "../actions/actionTypes";
 const initialState = {
   allPokemons: [],
   pokemon: [],
+  pokemonDetails: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -12,12 +19,30 @@ function rootReducer(state = initialState, action) {
         //pokemon: action.payload,
         allPokemons: action.payload,
       };
-    case SEARCH_BY_NAME:{
-      return{
+    case SEARCH_BY_NAME: {
+      return {
         ...state,
-        allPokemons: action.payload
-      }
+        allPokemons: action.payload,
+      };
     }
+    case GET_DETAILS: {
+      return {
+        ...state,
+        pokemonDetails: action.payload,
+      };
+    }
+    case CLEAR_PAGE: {
+      return {
+        ...state,
+        pokemonDetails: {},
+      };
+    }
+    case CREATE_POKEMON: {
+      return {
+        ...state,
+      };
+    }
+
     default:
       return state;
   }
