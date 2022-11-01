@@ -8,11 +8,12 @@ async function getPokemonsDb() {
     include: {
       model: Types,
       attributes: ["id", "name"],
-      //   through: {
-      //     attributes: [],
-      //   },
+        through: {
+          attributes: [],
+        },
     },
   });
+  
   return pokemonsDb;
 }
 
@@ -124,12 +125,20 @@ async function getPokemonByNameDbOrApi(value) {
     ],
     include: {
       model: Types,
-      attributes: ["id", "name"],
+      attributes: ["name"],
       through: {
         attributes: [], //investigar
       },
     },
   });
+
+  console.log(getPokemonByNameDb)
+  getPokemonByNameDb = getPokemonByNameDb.map((m)=>{
+    return{
+         ...m.dataValues,
+      types: m.types.map((m)=>m.name)
+    }
+  })
   if (!getPokemonByNameDb.length) return getPokemonByNameApi(value);
 
   return getPokemonByNameDb;

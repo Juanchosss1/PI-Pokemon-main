@@ -40,7 +40,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { name, life, attack, defense, speed, height, weight, type } = req.body;
+  const { name, life, attack, defense, speed, height, weight, types } = req.body;
   try {
     let newPokemon = await createPokemon(
       name,
@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
       speed,
       height,
       weight,
-      type
+      types
     );
     res.status(200).json(newPokemon);
   } catch (err) {

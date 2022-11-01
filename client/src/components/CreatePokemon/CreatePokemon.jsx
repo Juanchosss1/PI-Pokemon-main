@@ -10,7 +10,7 @@ const CreatePokemon = () => {
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getAllPokemons());
-  }, [dispatch]);
+  }, [dispatch, getTypes]);
 
   const [input, setInput] = useState({
     name: "",
@@ -35,6 +35,20 @@ const CreatePokemon = () => {
     e.preventDefault();
     dispatch(createPokemon(input));
   }
+/*
+  function handleChecked(e){
+   
+      let checked = e.target.checked
+      if(checked){
+        setInput({
+          ...input,
+          types: [...input.types,e.target.value]
+        });
+  
+      }
+    }
+    */
+  console.log(types)
 
   return (
     <div>
@@ -51,21 +65,21 @@ const CreatePokemon = () => {
         </div>
         <div>
           <label>Type: </label>
-          <select onChange={handlerCH}>
-            {types.length !== 0 ? (
+          
+            {/*types.length !== 0 ? (
               types.map((t) => {
                 return (
                   <div>
-                    <option key={t.id} value={t.name}>
+                    <input type='checkbox' value={t.name} name={t.name} >
                       {t.name}
-                    </option>
+                    </input>
                   </div>
                 );
               })
             ) : (
               <option>Loading...</option>
-            )}
-          </select>
+            )*/}
+          
         </div>
 
         <input type="submit" />
