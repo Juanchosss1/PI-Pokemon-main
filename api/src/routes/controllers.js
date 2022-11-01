@@ -189,7 +189,6 @@ async function createPokemon(
 
     let typesDb = await Types.findAll({
       where: { name: type },
-      include: Pokemons,
     });
 
     await pokemonCreate.addTypes(typesDb);

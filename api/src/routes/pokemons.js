@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
       let allPoke = await allPokemons();
       res.status(200).json(allPoke);
     } catch (err) {
-      console.log(err); //crear componente de error;
+      err.message; //crear componente de error;
     }
   }
 });
@@ -54,7 +54,9 @@ router.post("/", async (req, res) => {
     );
     res.status(200).json(newPokemon);
   } catch (err) {
-    res.status(400).send(`the name "${name}" its already in use`);
+    res
+      .status(400)
+      .send(/*`the name "${name}" its already in use`*/ err.message);
   }
 });
 
