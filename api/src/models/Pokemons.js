@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
         defaultValue: 100,
       },
       img: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         defaultValue:
           "https://vader.news/__export/1588965166057/sites/gadgets/img/2020/05/08/2-25193_pokemon-ball-transparent-background-transparent-background-pokeball-png.png_423682103.png",
         validate: {

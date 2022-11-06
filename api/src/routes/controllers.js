@@ -7,14 +7,21 @@ async function getPokemonsDb() {
     attributes: ["id", "name", "img"],
     include: {
       model: Types,
-      attributes: ["id", "name"],
-        through: {
-          attributes: [],
-        },
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
     },
   });
-  
-  return pokemonsDb;
+
+  let pokemonsDbNew = pokemonsDb.map((m) => {
+    return {
+      ...m.dataValues,
+      types: m.types.map((m) => m.name),
+    };
+  });
+
+  return pokemonsDbNew;
 }
 
 async function getPokemonsApi() {
@@ -33,44 +40,12 @@ async function getPokemonsApi() {
     arrayPokemons.push({
       id: url.data.id,
       name: url.data.name,
-      // height: url.data.height,
-      // weight: url.data.weight,
-      // life: url.data.stats[0].base_stat,
-      // atack: url.data.stats[1].base_stat,
-      // defense: url.data.stats[2].base_stat,
-      // speed: url.data.stats[5].base_stat,
       types: url.data.types.map((e) => e.type.name),
       img: url.data.sprites.front_default,
     });
   }
 
   return arrayPokemons;
-
-  /*
-  const pokemonsUrlApi = await axios(
-    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=5"
-  );
-  const pokemonUrl = pokemonsUrlApi.data.results.map((e) => e.url);
-  let arrayPokemons = [];
-
-  for (i = 0; i < pokemonUrl.length; i++) {
-    const url = await axios(pokemonUrl[i]);
-    arrayPokemons.push({
-      name: url.data.name,
-      // height: url.data.height,
-      // weight: url.data.weight,
-      // life: url.data.stats[0].base_stat,
-      // atack: url.data.stats[1].base_stat,
-      // defense: url.data.stats[2].base_stat,
-      // speed: url.data.stats[5].base_stat,
-      type: url.data.types.map((e) => e.type.name),
-      img: url.data.sprites.front_default,
-    });
-  }
-
-  return arrayPokemons;
-
-  */
 }
 
 async function allPokemons() {
@@ -127,18 +102,11 @@ async function getPokemonByNameDbOrApi(value) {
       model: Types,
       attributes: ["name"],
       through: {
-        attributes: [], //investigar
+        attributes: ["name"], //investigar
       },
     },
   });
 
-  console.log(getPokemonByNameDb)
-  getPokemonByNameDb = getPokemonByNameDb.map((m)=>{
-    return{
-         ...m.dataValues,
-      types: m.types.map((m)=>m.name)
-    }
-  })
   if (!getPokemonByNameDb.length) return getPokemonByNameApi(value);
 
   return getPokemonByNameDb;
@@ -162,6 +130,15 @@ async function getPokemonById(id) {
   }
 }
 
+async function findPokemonInApi(name) {
+  let existInApi = await axios
+    .get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
+    .catch(() => {
+      return false;
+    });
+  if (existInApi) return true;
+}
+
 async function createPokemon(
   name,
   life,
@@ -174,36 +151,35 @@ async function createPokemon(
   img,
   createDb
 ) {
-  try {
-    let existInApi = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`
+  if (await findPokemonInApi(name))
+    throw new Error(`the Pokemon "${name}"  already exists, try another name`);
+
+  let existInDb = await Pokemons.findOne({ where: { name } });
+  if (existInDb)
+    throw new Error(
+      `the Pokemon "${PokemonInDb.name}"  already exists, try another name`
     );
 
-    if (existInApi)
-      return `The pokemon "${name} already exist, try another name"`;
-  } catch (poke) {
-    const pokemonCreate = await Pokemons.create({
-      name: name.toLowerCase(),
-      life: life,
-      attack: attack,
-      defense: defense,
-      speed: speed,
-      height: height,
-      weight: weight,
-      img: img,
-      createDb: createDb,
-    });
+  const pokemonCreate = await Pokemons.create({
+    name: name.toLowerCase(),
+    life: parseInt(life, 10),
+    attack: parseInt(attack, 10),
+    defense: parseInt(defense, 10),
+    speed: parseInt(speed, 10),
+    height: parseInt(height, 10),
+    weight: parseInt(weight, 10),
+    img: img,
+    createDb: createDb,
+  });
 
-    await getPokemonTypes();
+  getPokemonTypes(); //eliminar una vez q el force este true
+  let typesDb = await Types.findAll({
+    where: { name: type },
+  });
 
-    let typesDb = await Types.findAll({
-      where: { name: type },
-    });
-
-    await pokemonCreate.addTypes(typesDb);
-    //si o si hay q elegir un tipo de pokeweon
-    return pokemonCreate;
-  }
+  await pokemonCreate.addTypes(typesDb);
+  //si o si hay q elegir un tipo de pokeweon
+  return pokemonCreate;
 }
 
 async function getPokemonTypes() {
@@ -211,12 +187,12 @@ async function getPokemonTypes() {
   let pokemonTypes = pokemonTypesApi.data.results.map((e) => {
     return { name: e.name };
   });
-
-  await Types.bulkCreate(pokemonTypes);
-
   let pokemonsTypesDb = await Types.findAll({
     attributes: ["id", "name"],
   });
+  if (pokemonsTypesDb.length === 0) {
+    await Types.bulkCreate(pokemonTypes);
+  }
 
   return pokemonsTypesDb;
 }

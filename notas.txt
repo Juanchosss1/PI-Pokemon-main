@@ -1,1 +1,2 @@
 no puedo manejar el error cuando busco pokemones en el controllers - getPokemonsByName, ya que necesito primero verificar que el pokemon no existe, previo a ser
+redireccionar cuando entro en detalles de pokeon (BUSCO SOLO DESDE HOME)
