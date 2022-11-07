@@ -6,6 +6,7 @@ const {
   allPokemons,
   getPokemonByNameDbOrApi,
   createPokemon,
+  pokemonFiltered,
 } = require("./controllers.js");
 
 const router = Router();
@@ -69,8 +70,20 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res
       .status(400)
-      .send(/*`the name "${name}" its already in use`*/ err.message);
+      .send(err.message);
   }
 });
-
+/*
+router.get('/filtered', async(req, res)=>{
+  const {data} =req.query
+  if(data === "alphabeticalAsc"){
+    try{
+      let pokemonFilteredAsc=await pokemonFiltered(data)
+      res.status(200).json(pokemonFilteredAsc)
+    }catch(err){
+      res.status(400).json(err.message)
+    }
+  }
+})
+*/
 module.exports = router;

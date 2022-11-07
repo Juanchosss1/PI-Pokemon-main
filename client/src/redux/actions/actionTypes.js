@@ -4,3 +4,5 @@ export const GET_DETAILS = "GET_DETAILS";
 export const CLEAR_PAGE = "CLEAR_PAGE";
 export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_TYPES = "GET_TYPES";
+export const SORT_BY_NAME = 'SORT_BY_NAME'
+export const SORT_BY_STORAGE = 'SORT_BY_STORAGE'

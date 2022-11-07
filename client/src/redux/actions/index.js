@@ -5,6 +5,9 @@ import {
   GET_DETAILS,
   CREATE_POKEMON,
   GET_TYPES,
+  SORT_BY_NAME,
+  CLEAR_PAGE,
+  SORT_BY_STORAGE,
 } from "./actionTypes";
 
 export function getAllPokemons() {
@@ -63,7 +66,7 @@ export function getDetails(value) {
 
 export function clearPage() {
   return {
-    type: "CLEAR_PAGE",
+    type: CLEAR_PAGE,
   };
 }
 
@@ -77,4 +80,18 @@ export function createPokemon(payload) {
       window.alert(err.response.data);
     }
   };
+}
+
+export function sortByName(payload){
+  return{
+    type: SORT_BY_NAME,
+    payload,
+  }
+}
+
+export function sortByStorage(payload){
+  return{
+    type:SORT_BY_STORAGE,
+    payload,
+  }
 }

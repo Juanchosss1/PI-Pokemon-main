@@ -196,14 +196,23 @@ async function getPokemonTypes() {
 
   return pokemonsTypesDb;
 }
+/*
+async function pokemonFiltered(data){
+const {alphabeticalAsc, alphabeticalDsc} = data
 
+
+  let allPokemons =await allPokemons()
+  alphabeticalAsc= allPokemons.sort((a, b)=> a.name.localeCompare(b.name))
+  console.log(alphabeticalAsc)
+
+}
+
+*/
 module.exports = {
-  getPokemonsDb,
-  getPokemonsApi,
   allPokemons,
   getPokemonById,
-  getPokemonByNameApi,
   getPokemonByNameDbOrApi,
   getPokemonTypes,
   createPokemon,
+  
 };

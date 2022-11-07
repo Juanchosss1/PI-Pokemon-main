@@ -4,7 +4,9 @@ import {
   GET_ALL_POKEMONS,
   GET_DETAILS,
   GET_TYPES,
+  SORT_BY_NAME,
   SEARCH_BY_NAME,
+  SORT_BY_STORAGE,
 } from "../actions/actionTypes";
 const initialState = {
   allPokemons: [],
@@ -49,6 +51,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         types: action.payload,
       };
+    }
+    case SORT_BY_NAME:{
+      
+    let sortByName =  (action.payload === 'asc') ? state.allPokemons.sort((a,b)=> a.name.localeCompare(b.name)) : state.allPokemons.sort((a,b)=> b.name.localeCompare(a.name))
+    return{
+      ...state,
+      allPokemons: sortByName
+    }
+    }
+
+    case SORT_BY_STORAGE:{
+      let sortByStorage = (action.payload === 'inDb') ? state.allPokemons.filter((e) => e.id.length > 10) : state.allPokemons.filter((e) => e.id.length < 10) 
+      return{
+        ...state,
+        allPokemons: sortByStorage
+      }
     }
 
     default:
