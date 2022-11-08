@@ -10,7 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.allPokemons);
   const [order, setOrder] = useState("");
-  const [stored, setStored] = useState("");
+ const [stored, setStored] = useState("");
 
   useEffect(() => {
     dispatch(getAllPokemons());
@@ -20,15 +20,19 @@ const Home = () => {
     e.preventDefault();
     setOrder(e.target.value);
     dispatch(sortByName(e.target.value));
-    //console.log(order)
+    console.log(order)
   }
-
+/*
   function handleStoredIn(e) {
-    e.preventDefault();
-    setStored(e.target.value);
+   // setStored(e.target.value);
     dispatch(sortByStorage(e.target.value));
-    console.log(stored);
+    console.log(e.target.value);
   }
+*/
+function handleStoredIn(e){
+  setStored(e.target.value)
+  console.log(stored)
+}
 
   return (
     <div>
@@ -45,7 +49,7 @@ const Home = () => {
         <div>
           <label>Stored in:</label>
           <select onChange={(e) => handleStoredIn(e)}>
-            <option value="none">None</option>
+            <option value="all">All</option>
             <option value="inDb">Stored in DB</option>
             <option value="inApi">Stored in API</option>
           </select>

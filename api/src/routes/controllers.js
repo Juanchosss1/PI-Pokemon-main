@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 
 async function getPokemonsDb() {
   let pokemonsDb = await Pokemons.findAll({
-    attributes: ["id", "name", "img"],
+    attributes: ["id", "name", "img", "createDb"],
     include: {
       model: Types,
       attributes: ["name"],

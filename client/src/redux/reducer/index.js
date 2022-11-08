@@ -10,6 +10,7 @@ import {
 } from "../actions/actionTypes";
 const initialState = {
   allPokemons: [],
+  allPokemonsFiltered: [],
   pokemon: [],
   pokemonDetails: {},
   types: [],
@@ -52,7 +53,9 @@ function rootReducer(state = initialState, action) {
         types: action.payload,
       };
     }
+    
     case SORT_BY_NAME: {
+
       let sortByName =
         action.payload === "asc"
           ? state.allPokemons.sort((a, b) => a.name.localeCompare(b.name))
@@ -64,13 +67,15 @@ function rootReducer(state = initialState, action) {
     }
 
     case SORT_BY_STORAGE: {
-      let sortByStorage =
+      const allPokemonsFiltered = [...state.allPokemons]
+      
+      const sortByStorage =
         action.payload === "inDb"
-          ? state.allPokemons.filter((e) => e.id.length > 10)
-          : state.allPokemons.filter((e) => e.id.length <= 4);
+          ? allPokemonsFiltered.filter((e) => e.createDb)
+          : state.allPokemons.filter((e) => !e.createDb);
       return {
         ...state,
-        allPokemons: sortByStorage,
+        allPokemons: action.payload === 'all'? allPokemonsFiltered : sortByStorage,
       };
     }
 
