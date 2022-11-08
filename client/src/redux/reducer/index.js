@@ -52,21 +52,26 @@ function rootReducer(state = initialState, action) {
         types: action.payload,
       };
     }
-    case SORT_BY_NAME:{
-      
-    let sortByName =  (action.payload === 'asc') ? state.allPokemons.sort((a,b)=> a.name.localeCompare(b.name)) : state.allPokemons.sort((a,b)=> b.name.localeCompare(a.name))
-    return{
-      ...state,
-      allPokemons: sortByName
-    }
+    case SORT_BY_NAME: {
+      let sortByName =
+        action.payload === "asc"
+          ? state.allPokemons.sort((a, b) => a.name.localeCompare(b.name))
+          : state.allPokemons.sort((a, b) => b.name.localeCompare(a.name));
+      return {
+        ...state,
+        allPokemons: sortByName,
+      };
     }
 
-    case SORT_BY_STORAGE:{
-      let sortByStorage = (action.payload === 'inDb') ? state.allPokemons.filter((e) => e.id.length > 10) : state.allPokemons.filter((e) => e.id.length < 10) 
-      return{
+    case SORT_BY_STORAGE: {
+      let sortByStorage =
+        action.payload === "inDb"
+          ? state.allPokemons.filter((e) => e.id.length > 10)
+          : state.allPokemons.filter((e) => e.id.length <= 4);
+      return {
         ...state,
-        allPokemons: sortByStorage
-      }
+        allPokemons: sortByStorage,
+      };
     }
 
     default:
