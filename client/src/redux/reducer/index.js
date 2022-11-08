@@ -7,6 +7,7 @@ import {
   SORT_BY_NAME,
   SEARCH_BY_NAME,
   SORT_BY_STORAGE,
+  SORT_BY_TYPE,
 } from "../actions/actionTypes";
 const initialState = {
   allPokemons: [],
@@ -21,7 +22,7 @@ function rootReducer(state = initialState, action) {
     case GET_ALL_POKEMONS:
       return {
         ...state,
-        //pokemon: action.payload,
+        allPokemonsFiltered: action.payload,
         allPokemons: action.payload,
       };
     case SEARCH_BY_NAME: {
@@ -53,9 +54,8 @@ function rootReducer(state = initialState, action) {
         types: action.payload,
       };
     }
-    
-    case SORT_BY_NAME: {
 
+    case SORT_BY_NAME: {
       let sortByName =
         action.payload === "asc"
           ? state.allPokemons.sort((a, b) => a.name.localeCompare(b.name))
@@ -67,15 +67,25 @@ function rootReducer(state = initialState, action) {
     }
 
     case SORT_BY_STORAGE: {
-      const allPokemonsFiltered = [...state.allPokemons]
-      
+      let allPokemonsFilteredDb = state.allPokemonsFiltered;
+
       const sortByStorage =
         action.payload === "inDb"
-          ? allPokemonsFiltered.filter((e) => e.createDb)
-          : state.allPokemons.filter((e) => !e.createDb);
+          ? state.allPokemonsFiltered.filter((e) => e.createDb)
+          : state.allPokemonsFiltered.filter((e) => !e.createDb);
       return {
         ...state,
-        allPokemons: action.payload === 'all'? allPokemonsFiltered : sortByStorage,
+        allPokemons:
+          action.payload === "all" ? allPokemonsFilteredDb : sortByStorage,
+      };
+    }
+    case SORT_BY_TYPE: {
+      const sortByType = state.allPokemonsFiltered.filter((e) =>
+        e.includes(action.payload)
+      );
+      return {
+        ...state,
+        allPokemons: sortByType,
       };
     }
 

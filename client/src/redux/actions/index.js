@@ -8,6 +8,7 @@ import {
   SORT_BY_NAME,
   CLEAR_PAGE,
   SORT_BY_STORAGE,
+  SORT_BY_TYPE,
 } from "./actionTypes";
 
 export function getAllPokemons() {
@@ -82,16 +83,22 @@ export function createPokemon(payload) {
   };
 }
 
-export function sortByName(payload){
-  return{
+export function sortByName(payload) {
+  return {
     type: SORT_BY_NAME,
     payload,
-  }
+  };
 }
 
-export function sortByStorage(payload){
-  return{
-    type:SORT_BY_STORAGE,
+export function sortByStorage(payload) {
+  return {
+    type: SORT_BY_STORAGE,
     payload,
-  }
+  };
+}
+export function sortByType(payload) {
+  return {
+    type: SORT_BY_TYPE,
+    payload,
+  };
 }
