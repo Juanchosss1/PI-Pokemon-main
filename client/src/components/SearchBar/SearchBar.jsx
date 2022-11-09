@@ -7,6 +7,7 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const history = useHistory();
+  
   function handleInput(e) {
     e.preventDefault();
     setName(e.target.value);

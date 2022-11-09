@@ -9,6 +9,7 @@ import {
   CLEAR_PAGE,
   SORT_BY_STORAGE,
   SORT_BY_TYPE,
+  SORT_BY_ATTACK,
 } from "./actionTypes";
 
 export function getAllPokemons() {
@@ -101,4 +102,11 @@ export function sortByType(payload) {
     type: SORT_BY_TYPE,
     payload,
   };
+}
+
+export function sortByAttack(payload){
+  return{
+    type: SORT_BY_ATTACK,
+    payload
+  }
 }

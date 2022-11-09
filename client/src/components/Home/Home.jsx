@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllPokemons,
   getTypes,
+  sortByAttack,
   sortByName,
   sortByStorage,
+  sortByType,
 } from "../../redux/actions";
 import Card from "../Card/Card";
 import loadingHome from "../../img/loadingScreen.gif";
@@ -35,13 +37,19 @@ const Home = () => {
     dispatch(sortByStorage(stored));
     console.log(e.target.value);
   }
+  function handleOrderAttack(e) {
+    let attack = e.target.value;
+    dispatch(sortByAttack(attack));
+    console.log(attack);
+  }
 
-  function handleByTypes(e) {}
+  function handleByTypes(e) {
+    let type = e.target.value;
+    // console.log(type)
+    dispatch(sortByType(type))
+  }
 
-  // function handleStoredIn(e) {
-  //   setStored(e.target.value);
-  //   console.log(stored);
-  // }
+ 
 
   return (
     <div>
@@ -69,10 +77,19 @@ const Home = () => {
             <option value="none">None</option>
             {allTypes &&
               allTypes.map((e) => {
-                return <option value={e.name}>{e.name}</option>;
+                return <option key={e.id} value={e.name}>{e.name}</option>;
               })}
           </select>
         </div>
+        <div>
+          <label>Sort by attack:</label>
+          <select onChange={(e) => handleOrderAttack(e)}>
+            <option value="all">All</option>
+            <option value="higher">Higher Attack</option>
+            <option value="lower">Lower Attack</option>
+          </select>
+        </div>
+
         {console.log(allPokemons)}
         {allPokemons.length !== 0 ? (
           allPokemons.map((c) => {

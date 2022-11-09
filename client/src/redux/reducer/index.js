@@ -8,6 +8,7 @@ import {
   SEARCH_BY_NAME,
   SORT_BY_STORAGE,
   SORT_BY_TYPE,
+  SORT_BY_ATTACK,
 } from "../actions/actionTypes";
 const initialState = {
   allPokemons: [],
@@ -80,12 +81,26 @@ function rootReducer(state = initialState, action) {
       };
     }
     case SORT_BY_TYPE: {
-      const sortByType = state.allPokemonsFiltered.filter((e) =>
-        e.includes(action.payload)
+      const sortByType = [...state.allPokemonsFiltered].filter((e) =>
+        e.types.includes(action.payload)
       );
       return {
         ...state,
-        allPokemons: sortByType,
+        allPokemons: action.payload === 'none' ? state.allPokemons : sortByType,
+      };
+    }
+    case SORT_BY_ATTACK: {
+      let sortByName =
+        action.payload === "higher"
+          ? state.allPokemons.sort(function(a,b){
+            return a.attack-b.attack;
+        })
+          : state.allPokemons.sort(function(a,b){
+            return b.attack-a.attack;
+        })
+      return {
+        ...state,
+        allPokemons: sortByName,
       };
     }
 
