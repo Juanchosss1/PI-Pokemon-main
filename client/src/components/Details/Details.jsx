@@ -21,7 +21,7 @@ const Details = (props) => {
       <img src={pokemonsDetails.img} alt={pokemonsDetails.name} />
       <div>
         <li>Life: {pokemonsDetails.life} </li>
-        <li>Attack: {pokemonsDetails.attack}</li>
+        <li>Attack: {pokemonsDetails.atack}</li>
         <li>Defense: {pokemonsDetails.defense}</li>
         <li>Speed: {pokemonsDetails.speed}</li>
         <li>Height: {pokemonsDetails.height}</li>

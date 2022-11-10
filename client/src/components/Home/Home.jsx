@@ -9,6 +9,7 @@ import {
   sortByType,
 } from "../../redux/actions";
 import Card from "../Card/Card";
+import Pagination from "../Pagination/Pagination";
 import loadingHome from "../../img/loadingScreen.gif";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -18,7 +19,17 @@ const Home = () => {
   const allPokemons = useSelector((state) => state.allPokemons);
   const allTypes = useSelector((state) => state.types);
   const [order, setOrder] = useState("");
-  const [types, setTypes] = useState("");
+  // const [types, setTypes] = useState("");
+  const [currentPage, setCurrent] = useState(1);
+  const pokemonsPerPage = 12;
+
+  const indexLastPok = currentPage * pokemonsPerPage;
+  const indexFirstPok = indexLastPok - pokemonsPerPage;
+  const currentPokemons = allPokemons?.slice(indexFirstPok, indexLastPok);
+
+  const pagination = (currentPage) => {
+    setCurrent(currentPage);
+  };
 
   useEffect(() => {
     dispatch(getAllPokemons());
@@ -35,22 +46,24 @@ const Home = () => {
   function handleStoredIn(e) {
     let stored = e.target.value;
     dispatch(sortByStorage(stored));
+    setCurrent(1);
     console.log(e.target.value);
   }
   function handleOrderAttack(e) {
     let attack = e.target.value;
     dispatch(sortByAttack(attack));
+    setCurrent(1);
     console.log(attack);
   }
 
   function handleByTypes(e) {
     let type = e.target.value;
     // console.log(type)
-    dispatch(sortByType(type))
+    setCurrent(1);
+    dispatch(sortByType(type));
   }
 
- 
-
+  console.log(currentPokemons);
   return (
     <div>
       Home
@@ -77,7 +90,11 @@ const Home = () => {
             <option value="none">None</option>
             {allTypes &&
               allTypes.map((e) => {
-                return <option key={e.id} value={e.name}>{e.name}</option>;
+                return (
+                  <option key={e.id} value={e.name}>
+                    {e.name}
+                  </option>
+                );
               })}
           </select>
         </div>
@@ -91,8 +108,8 @@ const Home = () => {
         </div>
 
         {console.log(allPokemons)}
-        {allPokemons.length !== 0 ? (
-          allPokemons.map((c) => {
+        {currentPokemons.length !== 0 ? (
+          currentPokemons.map((c) => {
             return (
               <Link key={c.id} to={"/Details/" + c.id}>
                 <Card id={c.id} name={c.name} img={c.img} type={c.types} />
@@ -105,6 +122,14 @@ const Home = () => {
             <p>Loading...</p>
           </div>
         )}
+        <div>
+          <Pagination
+            pokemonsPerPage={pokemonsPerPage}
+            allPokemons={allPokemons.length}
+            pagination={pagination}
+            currentPage={currentPage}
+          />
+        </div>
       </div>
     </div>
   );

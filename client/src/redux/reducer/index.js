@@ -68,12 +68,12 @@ function rootReducer(state = initialState, action) {
     }
 
     case SORT_BY_STORAGE: {
-      let allPokemonsFilteredDb = state.allPokemonsFiltered;
+      let allPokemonsFilteredDb = state.allPokemons;
 
       const sortByStorage =
         action.payload === "inDb"
-          ? state.allPokemonsFiltered.filter((e) => e.createDb)
-          : state.allPokemonsFiltered.filter((e) => !e.createDb);
+          ? state.allPokemons.filter((e) => e.createDb)
+          : state.allPokemons.filter((e) => !e.createDb);
       return {
         ...state,
         allPokemons:
@@ -86,18 +86,19 @@ function rootReducer(state = initialState, action) {
       );
       return {
         ...state,
-        allPokemons: action.payload === 'none' ? state.allPokemons : sortByType,
+        allPokemons: action.payload === "none" ? state.allPokemons : sortByType,
       };
     }
     case SORT_BY_ATTACK: {
+      let sortedAtack = [...state.allPokemonsFiltered];
       let sortByName =
         action.payload === "higher"
-          ? state.allPokemons.sort(function(a,b){
-            return a.attack-b.attack;
-        })
-          : state.allPokemons.sort(function(a,b){
-            return b.attack-a.attack;
-        })
+          ? sortedAtack.sort(function (a, b) {
+              return b.attack - a.attack;
+            })
+          : sortedAtack.sort(function (a, b) {
+              return a.attack - b.attack;
+            });
       return {
         ...state,
         allPokemons: sortByName,
