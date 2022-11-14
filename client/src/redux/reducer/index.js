@@ -68,40 +68,55 @@ function rootReducer(state = initialState, action) {
     }
 
     case SORT_BY_STORAGE: {
-      let allPokemonsFilteredDb = state.allPokemons;
+      let allPokemonsFilteredDb = state.allPokemonsFiltered;
 
       const sortByStorage =
         action.payload === "inDb"
-          ? state.allPokemons.filter((e) => e.createDb)
-          : state.allPokemons.filter((e) => !e.createDb);
+          ? allPokemonsFilteredDb.filter((e) => e.createDb)
+          : action.payload === "inApi"
+          ? allPokemonsFilteredDb.filter((e) => !e.createDb)
+          : action.payload === "all" && allPokemonsFilteredDb;
       return {
         ...state,
-        allPokemons:
-          action.payload === "all" ? allPokemonsFilteredDb : sortByStorage,
+        allPokemons: sortByStorage,
       };
     }
     case SORT_BY_TYPE: {
-      const sortByType = [...state.allPokemonsFiltered].filter((e) =>
+      const pokemonTypeFilter = state.allPokemonsFiltered;
+      const typeFilter =
+        action.payload === "none"
+          ? pokemonTypeFilter
+          : pokemonTypeFilter.filter(
+              (t) =>
+                t.types[0] === action.payload || t.types[1] === action.payload
+            );
+      return {
+        ...state,
+        allPokemons: typeFilter,
+      };
+      /*
+      const sortByType = state.allPokemons.filter((e) =>
         e.types.includes(action.payload)
       );
       return {
         ...state,
         allPokemons: action.payload === "none" ? state.allPokemons : sortByType,
       };
+    */
     }
+
     case SORT_BY_ATTACK: {
-      let sortedAtack = [...state.allPokemonsFiltered];
-      let sortByName =
+      let sortByAttack =
         action.payload === "higher"
-          ? sortedAtack.sort(function (a, b) {
+          ? state.allPokemons.sort(function (a, b) {
               return b.attack - a.attack;
             })
-          : sortedAtack.sort(function (a, b) {
+          : state.allPokemons.sort(function (a, b) {
               return a.attack - b.attack;
             });
       return {
         ...state,
-        allPokemons: sortByName,
+        allPokemons: sortByAttack,
       };
     }
 

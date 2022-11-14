@@ -69,7 +69,7 @@ async function getPokemonByNameApi(value) {
       types: getPokemon.data.types.map((e) => e.type.name),
       img: getPokemon.data.sprites.front_default,
       life: getPokemon.data.stats[0].base_stat,
-      atack: getPokemon.data.stats[1].base_stat,
+      attack: getPokemon.data.stats[1].base_stat,
       defense: getPokemon.data.stats[2].base_stat,
       speed: getPokemon.data.stats[5].base_stat,
       height: getPokemon.data.height,
@@ -103,11 +103,11 @@ async function getPokemonByNameDbOrApi(value) {
       model: Types,
       attributes: ["name"],
       through: {
-        attributes: ["name"], //investigar
+        attributes: [],
       },
     },
   });
-
+  console.log(value);
   if (!getPokemonByNameDb.length) return getPokemonByNameApi(value);
 
   return getPokemonByNameDb;
@@ -215,5 +215,4 @@ module.exports = {
   getPokemonByNameDbOrApi,
   getPokemonTypes,
   createPokemon,
-  
 };

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearPage, getDetails } from "../../redux/actions";
 import loadingDetails from "../../img/loadingScrenDetails.gif";
+import { Link, NavLink } from "react-router-dom";
 const Details = (props) => {
   console.log(props);
   const dispatch = useDispatch();
@@ -17,11 +18,12 @@ const Details = (props) => {
   console.log(pokemonsDetails);
   return Object.keys(pokemonsDetails).length !== 0 ? (
     <div>
+      <NavLink to="/home">Home</NavLink>
       <h1>{pokemonsDetails.name.toUpperCase()}</h1>
       <img src={pokemonsDetails.img} alt={pokemonsDetails.name} />
       <div>
         <li>Life: {pokemonsDetails.life} </li>
-        <li>Attack: {pokemonsDetails.atack}</li>
+        <li>Attack: {pokemonsDetails.attack}</li>
         <li>Defense: {pokemonsDetails.defense}</li>
         <li>Speed: {pokemonsDetails.speed}</li>
         <li>Height: {pokemonsDetails.height}</li>

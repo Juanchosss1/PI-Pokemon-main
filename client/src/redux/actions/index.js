@@ -39,7 +39,9 @@ export function getTypes() {
 export function searchPokemon(value) {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`http://localhost:3001/pokemons/${value}`);
+      let json = await axios.get(
+        `http://localhost:3001/pokemons?name=${value}`
+      );
       let arr = [];
       arr.push(json.data);
       return dispatch({
@@ -56,6 +58,7 @@ export function getDetails(value) {
   return async function (dispatch) {
     try {
       let json = await axios.get(`http://localhost:3001/pokemons/${value}`);
+      console.log(json.data);
       return dispatch({
         type: GET_DETAILS,
         payload: json.data,
@@ -104,9 +107,9 @@ export function sortByType(payload) {
   };
 }
 
-export function sortByAttack(payload){
-  return{
+export function sortByAttack(payload) {
+  return {
     type: SORT_BY_ATTACK,
-    payload
-  }
+    payload,
+  };
 }

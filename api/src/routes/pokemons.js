@@ -18,7 +18,9 @@ router.get("/", async (req, res) => {
       let pokemonByName = await getPokemonByNameDbOrApi(name);
       res.status(200).json(pokemonByName);
     } catch (err) {
-      res.status(404).send(`The pokemon with name "${name}" doesn´t exist`);
+      res
+        .status(404)
+        .send(/*`The pokemon with name "${name}" doesn´t exist`*/ err.message);
     }
   } else {
     try {
@@ -68,9 +70,7 @@ router.post("/", async (req, res) => {
     );
     res.status(200).json(newPokemon);
   } catch (err) {
-    res
-      .status(400)
-      .send(err.message);
+    res.status(400).send(err.message);
   }
 });
 /*
