@@ -21,7 +21,7 @@ const Home = () => {
   const allPokemons = useSelector((state) => state.allPokemons);
   const allTypes = useSelector((state) => state.types);
   const [order, setOrder] = useState("");
-  // const [types, setTypes] = useState("");
+  
 
   const [currentPage, setCurrent] = useState(1);
   const pokemonsPerPage = 12;

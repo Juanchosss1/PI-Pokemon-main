@@ -44,7 +44,7 @@ export function searchPokemon(value) {
       );
       let arr = [];
       arr.push(json.data);
-      return dispatch({
+        return dispatch({
         type: SEARCH_BY_NAME,
         payload: arr,
       });

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearPage, getDetails } from "../../redux/actions";
 import loadingDetails from "../../img/loadingScrenDetails.gif";
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 const Details = (props) => {
   console.log(props);
   const dispatch = useDispatch();
