@@ -21,7 +21,6 @@ const Home = () => {
   const allPokemons = useSelector((state) => state.allPokemons);
   const allTypes = useSelector((state) => state.types);
   const [order, setOrder] = useState("");
-  
 
   const [currentPage, setCurrent] = useState(1);
   const pokemonsPerPage = 12;
@@ -44,6 +43,11 @@ const Home = () => {
     setOrder(e.target.value);
     dispatch(sortByName(e.target.value));
     setOrder(e.target.value);
+  }
+  function handleClick(e) {
+    e.preventDefault();
+    dispatch(getAllPokemons());
+    setCurrent(1);
   }
 
   function handleStoredIn(e) {
@@ -70,12 +74,21 @@ const Home = () => {
   console.log(currentPokemons);
   return (
     <div className={styles.background}>
-      Home
       <div className={styles.container}>
-        <SearchBar />
+        <button
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
+          Home!
+        </button>
+
+        <div className={styles.header}>
+          <NavLink to="/create">Create!</NavLink>
+          <SearchBar />
+        </div>
         <div className={styles.filters}>
           <div>
-            <NavLink to="/create">Create!</NavLink>
             <label>Sort alphabetically:</label>
             <select onChange={(e) => handleOrder(e)}>
               <option value="none">None</option>

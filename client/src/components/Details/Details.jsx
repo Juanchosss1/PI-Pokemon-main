@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearPage, getDetails } from "../../redux/actions";
 import loadingDetails from "../../img/loadingScrenDetails.gif";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const Details = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,7 +14,7 @@ const Details = (props) => {
   }, [dispatch, props]);
 
   const pokemonsDetails = useSelector((state) => state.pokemonDetails);
-  console.log(pokemonsDetails);
+
   return Object.keys(pokemonsDetails).length !== 0 ? (
     <div>
       <NavLink to="/home">Home</NavLink>

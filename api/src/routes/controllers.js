@@ -17,7 +17,7 @@ async function getPokemonsDb() {
   let pokemonsDbNew = pokemonsDb.map((m) => {
     return {
       ...m.dataValues,
-      types: m.types.map((m) => m.name),
+      types: m.types?.map((m) => m.name),
     };
   });
 
@@ -86,7 +86,7 @@ async function getPokemonByNameApi(value) {
 async function getPokemonByNameDbOrApi(value) {
   let getPokemonByNameDb = await Pokemons.findAll({
     where: {
-      name: value,
+      name: value.toLowerCase(),
     },
     attributes: [
       "id",
@@ -107,10 +107,17 @@ async function getPokemonByNameDbOrApi(value) {
       },
     },
   });
-  console.log(value);
-  if (!getPokemonByNameDb.length) return getPokemonByNameApi(value);
 
-  return getPokemonByNameDb;
+  getPokemonByNameDb = getPokemonByNameDb.map((m) => {
+    return {
+      ...m.dataValues,
+      types: m.types?.map((m) => m.name),
+    };
+  });
+
+  if (!getPokemonByNameDb[0]) return getPokemonByNameApi(value);
+
+  return getPokemonByNameDb[0];
 }
 
 async function getPokemonById(id) {

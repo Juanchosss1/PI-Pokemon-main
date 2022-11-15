@@ -94,15 +94,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         allPokemons: typeFilter,
       };
-      /*
-      const sortByType = state.allPokemons.filter((e) =>
-        e.types.includes(action.payload)
-      );
-      return {
-        ...state,
-        allPokemons: action.payload === "none" ? state.allPokemons : sortByType,
-      };
-    */
     }
 
     case SORT_BY_ATTACK: {

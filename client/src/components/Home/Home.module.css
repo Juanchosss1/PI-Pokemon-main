@@ -46,3 +46,8 @@
   flex-wrap: wrap;
   align-items: flex-start;
 }
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+}

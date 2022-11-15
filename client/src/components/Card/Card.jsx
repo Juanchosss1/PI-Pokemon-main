@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "../Card/Card.module.css";
-import './Card.css'
+import "./Card.css";
 
 const Card = ({ name, img, type, id }) => {
   return (
     <div className={styles.card} key={id}>
-    <div className="container">
-    <span className={`${type[0]}`}></span>
-    <span className={`${type[1]}`}></span>
-    </div>
+      <div className="container">
+        <div className={`${type[0]}`}></div>
+        <div className={`${type[1]}`}></div>
+      </div>
       <h1>{name.toUpperCase()}</h1>
-       
-          <img src={img} className={styles.imgsize} alt={`pokemon ${name}`} />
+
+      <img src={img} className={styles.imgsize} alt={`pokemon ${name}`} />
       <h5>
         Type:{" "}
         {type.map((m) =>

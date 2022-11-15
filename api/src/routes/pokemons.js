@@ -13,7 +13,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
-  
+
   if (name) {
     try {
       let pokemonByName = await getPokemonByNameDbOrApi(name);
