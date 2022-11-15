@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../Pagination/Pagination.module.css";
 
 const Pagination = ({
   pokemonsPerPage,
@@ -11,17 +12,23 @@ const Pagination = ({
     pageNumbers.push(i + 1);
   }
   return (
-    <div>
-      Pagination
+    <div className={styles.container}>
       {/*prev*/}
       {pageNumbers && currentPage > 1 ? (
-        <button onClick={() => pagination(currentPage - 1)}>Prev</button>
+        <button
+          className={styles.navigate}
+          onClick={() => pagination(currentPage - 1)}
+        ></button>
       ) : null}
       {/*intermedium*/}
       {pageNumbers &&
         pageNumbers.map((n) => {
           return (
-            <button key={n} onClick={() => pagination(n)}>
+            <button
+              className={currentPage === n ? styles.pageSelected : styles.page}
+              key={n}
+              onClick={() => pagination(n)}
+            >
               {n}
             </button>
           );
@@ -29,7 +36,12 @@ const Pagination = ({
       {/*next*/}
       {console.log(currentPage)}
       {pageNumbers && currentPage <= pageNumbers.length - 1 ? (
-        <button onClick={() => pagination(currentPage + 1)}>Next</button>
+        <button
+          className={styles.navigate}
+          onClick={() => pagination(currentPage + 1)}
+        >
+          Next
+        </button>
       ) : null}
     </div>
   );
