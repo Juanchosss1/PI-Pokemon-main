@@ -7,32 +7,38 @@
   align-items: center;
 }
 
-.navigate {
-  border-bottom: 3px solid #000;
-  border-right: 3px solid #000;
+.navigateprev {
+  border-bottom: 3px solid rgb(182, 181, 181);
+  border-right: 3px solid rgb(182, 181, 181);
   width: 8px;
   height: 8px;
   transform: rotate(135deg);
+}
+.navigatenext {
+  border-bottom: 3px solid rgb(182, 181, 181);
+  border-right: 3px solid rgb(182, 181, 181);
+  width: 8px;
+  height: 8px;
+  transform: rotate(-45deg);
 }
 
 .page {
   width: 40px;
   padding: 5px;
-  background-color: #35bcdd;
-  color: black;
+  background-color: transparent;
+  color: rgb(255, 255, 255);
   margin: 5px 10px;
-  border: 3px solid;
-  border-radius: 5px;
-  font-weight: bold;
+  
+  font-weight: lighter;
 }
 
 .pageSelected {
   width: 30px;
   padding: 5px;
-  background-color: rgba(138, 236, 231, 0.781);
-  color: rgb(190, 15, 15);
+  background-color:transparent;
+  color: rgb(223, 222, 222);
   margin: 5px 15px;
-  border: 3px solid #35bcdd;
-  border-radius: 5px;
+  border: 1px solid #b3b5b6;
+  border-radius: 2px;
   font-weight: bold;
 }

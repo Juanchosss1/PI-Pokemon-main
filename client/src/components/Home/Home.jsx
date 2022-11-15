@@ -11,7 +11,7 @@ import {
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import loadingHome from "../../img/Home/moltresTransparent.gif";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import styles from "../Home/Home.module.css";
 import SearchBar from "../SearchBar/SearchBar";
@@ -84,35 +84,40 @@ const Home = () => {
         </button>
 
         <div className={styles.header}>
-          <NavLink to="/create">Create!</NavLink>
+          <div>
+            <button>
+          <NavLink className={styles.link} to="/create">Create!</NavLink>
+            </button>
+          </div>
+          <div className={styles.searchbar}>
           <SearchBar />
+          </div>
         </div>
         <div className={styles.filters}>
-          <div>
             <label>Sort alphabetically:</label>
-            <select onChange={(e) => handleOrder(e)}>
-              <option value="none">None</option>
-              <option value="asc">A-Z</option>
-              <option value="dsc">Z-A</option>
+          <div >
+            <select className={styles.options} onChange={(e) => handleOrder(e)}>
+              <option   value="asc">- A-Z</option>
+              <option value="dsc">- Z-A</option>
             </select>
           </div>
           <div>
             <label>Stored in:</label>
             <select onChange={(e) => handleStoredIn(e)}>
-              <option value="all">All</option>
-              <option value="inDb">Stored in DB</option>
-              <option value="inApi">Stored in API</option>
+              <option value="all">- All</option>
+              <option value="inDb">- Stored in DB</option>
+              <option value="inApi">- Stored in API</option>
             </select>
           </div>
           <div>
             <label>Types: </label>
             <select onChange={(e) => handleByTypes(e)}>
-              <option value="none">None</option>
+              <option value="none">- None</option>
               {allTypes &&
                 allTypes.map((e) => {
                   return (
                     <option key={e.id} value={e.name}>
-                      {e.name}
+                      - {e.name}
                     </option>
                   );
                 })}
@@ -121,7 +126,6 @@ const Home = () => {
           <div>
             <label>Sort by attack:</label>
             <select onChange={(e) => handleOrderAttack(e)}>
-              <option value="all">All</option>
               <option value="higher">Higher Attack</option>
               <option value="lower">Lower Attack</option>
             </select>
@@ -133,14 +137,14 @@ const Home = () => {
               return (
                 <div className={styles.card}>
                   <ul>
-                    <Link key={c.id} to={"/Details/" + c.id}>
+                    <NavLink className={styles.link} key={c.id} to={"/Details/" + c.id}>
                       <Card
                         id={c.id}
                         name={c.name}
                         img={c.img}
                         type={c.types}
                       />
-                    </Link>
+                    </NavLink>
                   </ul>
                 </div>
               );

@@ -1,0 +1,42 @@
+.form{
+    font-family: 'Ubuntu', sans-serif;
+color: rgb(186, 187, 187);
+}
+
+.error{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 10px;
+    color: rgb(160, 12, 12);
+
+}
+
+.arrowLeft {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 22px
+}
+.arrowLeft::after,
+.arrowLeft::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 3px
+}
+.arrowLeft::after {
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    transform: rotate(45deg);
+    bottom: 7px
+}
+.arrowLeft::before {
+    width: 16px;
+    height: 2px;
+    bottom: 10px;
+    background: currentColor
+}

@@ -1,0 +1,8 @@
+input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: transparent;
+    color: rgb(202, 202, 202);
+  }

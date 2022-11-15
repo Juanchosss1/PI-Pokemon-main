@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { createPokemon, getAllPokemons, getTypes } from "../../redux/actions";
-
+import styles from '../CreatePokemon/CreatePokemon.module.css'
 function onlyLettersAndSpaces(str) {
   return /^[A-Za-z\s]*$/.test(str);
 }
@@ -50,30 +50,48 @@ const CreatePokemon = () => {
       if (pokemons.find((n) => n.name === input.name.toLowerCase())) {
         errors.name = `The name "${input.name}" it´s already used, try another one`;
       }
+      if (!input.life) {
+        errors.life = `You should enter a value in life to create a pokemon`;
+      }
     if (input.life.length ? input.life < 0 : (input.life = 0)) {
       errors.life = `Life must be greater than 0`;
     } else if (input.life > 999) {
       errors.life = `Life must be lesser than 1000`;
+    }
+    if (!input.attack) {
+      errors.attack = `You should enter a value in attack to create a pokemon`;
     }
     if (input.attack.length ? input.attack < 0 : (input.attack = 0)) {
       errors.attack = `Attack must be greater than 0`;
     } else if (input.attack > 999) {
       errors.life = `Attack must be lesser than 1000`;
     }
+    if (!input.defense) {
+      errors.attack = `You should enter a value in defense to create a pokemon`;
+    }
     if (input.defense.length ? input.defense < 0 : (input.defense = 0)) {
       errors.defense = `Defense must be greater than 0`;
     } else if (input.defense > 999) {
       errors.defense = `Defense must be lesser than 1000`;
+    }
+    if (!input.speed) {
+      errors.speed = `You should enter a value in speed to create a pokemon`;
     }
     if (input.speed.length ? input.speed < 0 : (input.speed = 0)) {
       errors.speed = `Speed must be greater than 0`;
     } else if (input.speed > 999) {
       errors.speed = `Speed must be lesser than 1000`;
     }
+    if (!input.height) {
+      errors.height = `You should enter a value in height to create a pokemon`;
+    }
     if (input.height.length ? input.height < 0 : (input.height = 0)) {
       errors.height = `Height must be greater than 0`;
     } else if (input.height > 999) {
       errors.height = `Height must be lesser than 1000`;
+    }
+    if (!input.weight) {
+      errors.weight = `You should enter a value in weight to create a pokemon`;
     }
     if (input.weight.length ? input.weight < 0 : (input.weight = 0)) {
       errors.weight = `Weight must be greater than 0`;
@@ -142,8 +160,12 @@ const CreatePokemon = () => {
 
   return (
     <div>
+      <NavLink to='/home'>
+      <i className={styles.arrowLeft}></i>
+      </NavLink>
       CreatePokemon
-      <form onSubmit={(e) => handleSubmit(e)}>
+
+      <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div>
           <label>Name: </label>
           <input
@@ -153,7 +175,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.name && <p>{errors.name}</p>}
+        
         <div>
           <label>Image: </label>
           <input
@@ -163,7 +185,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.img && <p>{errors.img}</p>}
+        
         <div>
           <label>Life: </label>
           <input
@@ -173,7 +195,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.life && <p>{errors.life}</p>}
+        
         <div>
           <label>Attack: </label>
           <input
@@ -183,7 +205,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.attack && <p>{errors.attack}</p>}
+        
         <div>
           <label>Defense: </label>
           <input
@@ -193,7 +215,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.defense && <p>{errors.defense}</p>}
+        
         <div>
           <label>Speed: </label>
           <input
@@ -203,7 +225,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.speed && <p>{errors.speed}</p>}
+       
         <div>
           <label>Height: </label>
           <input
@@ -213,7 +235,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.height && <p>{errors.height}</p>}
+      
         <div>
           <label>Weight: </label>
           <input
@@ -223,7 +245,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {errors.weight && <p>{errors.weight}</p>}
+        
         <div>
           <label>Type: </label>
 
@@ -243,9 +265,10 @@ const CreatePokemon = () => {
               );
             })
           ) : (
-            <option>Loading...</option>
+            <option>Loading types</option>
           )}
         </div>
+
 
         <button
           type="submit"
@@ -254,6 +277,19 @@ const CreatePokemon = () => {
           Enviar!
         </button>
       </form>
+      <div className={styles.error}>
+        
+
+      {errors.name && <p>{errors.name}</p>}
+      {errors.img && <p>{errors.img}</p>}
+      {errors.life && <p>{errors.life}</p>}
+      {errors.attack && <p>{errors.attack}</p>}
+      {errors.defense && <p>{errors.defense}</p>}
+      {errors.speed && <p>{errors.speed}</p>}
+      {errors.height && <p>{errors.height}</p>}
+      {errors.weight && <p>{errors.weight}</p>}
+        
+      </div>
     </div>
   );
 };

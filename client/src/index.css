@@ -5,7 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-image: linear-gradient(
+    210deg,
+    hsl(0deg 0% 0%) 0%,
+    hsl(60deg 17% 2%) 7%,
+    hsl(60deg 7% 4%) 19%,
+    hsl(60deg 4% 6%) 33%,
+    hsl(60deg 3% 8%) 46%,
+    hsl(60deg 2% 9%) 60%,
+    hsl(60deg 2% 10%) 72%,
+    hsl(60deg 2% 12%) 84%,
+    hsl(60deg 1% 13%) 94%,
+    hsl(60deg 1% 14%) 100%
+  );
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

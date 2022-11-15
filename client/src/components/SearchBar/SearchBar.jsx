@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 //import { useHistory } from "react-router-dom";
 import { searchPokemon } from "../../redux/actions/index.js";
+import styles from '../SearchBar/SearchBar.module.css'
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -25,8 +26,8 @@ const SearchBar = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.form}>
+      <form  onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search Pokemon!"
@@ -34,7 +35,7 @@ const SearchBar = () => {
           onChange={(e) => handleInput(e)}
         />
         <button type="submit">Search!</button>
-      </form>
+         </form>
     </div>
   );
 };

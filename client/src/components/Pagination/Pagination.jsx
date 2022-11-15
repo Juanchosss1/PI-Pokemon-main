@@ -16,7 +16,7 @@ const Pagination = ({
       {/*prev*/}
       {pageNumbers && currentPage > 1 ? (
         <button
-          className={styles.navigate}
+          className={styles.navigateprev}
           onClick={() => pagination(currentPage - 1)}
         ></button>
       ) : null}
@@ -37,11 +37,9 @@ const Pagination = ({
       {console.log(currentPage)}
       {pageNumbers && currentPage <= pageNumbers.length - 1 ? (
         <button
-          className={styles.navigate}
+          className={styles.navigatenext}
           onClick={() => pagination(currentPage + 1)}
-        >
-          Next
-        </button>
+        ></button>
       ) : null}
     </div>
   );

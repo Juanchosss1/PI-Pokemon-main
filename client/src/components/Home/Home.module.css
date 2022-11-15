@@ -3,14 +3,14 @@
   width: 100%;
   height: 100%;
   justify-content: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   text-align: center;
   align-items: center;
   align-content: center;
   text-align: center;
   color: azure;
   flex-direction: column;
+  /* background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   background-image: linear-gradient(
     210deg,
@@ -24,7 +24,7 @@
     hsl(60deg 2% 12%) 84%,
     hsl(60deg 1% 13%) 94%,
     hsl(60deg 1% 14%) 100%
-  );
+  ); */
   margin-bottom: -500px;
   font-family: "Bebas Neue", cursive;
 }
@@ -36,7 +36,7 @@
 }
 
 .card {
-  display: grid;
+  display: flex;
   grid-template-columns: auto auto auto auto;
   gap: 10px;
   flex-direction: row;
@@ -50,4 +50,29 @@
 .header {
   display: flex;
   flex-wrap: wrap;
-}
+  }
+
+  .searchbar{
+    align-self: flex-end;
+    padding-left: 20vh;
+    
+  }
+
+  .link{
+    text-decoration: none;
+  }
+
+  .select option{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    color: rgb(139, 139, 139);
+    backdrop-filter: blur(10px);
+    background-color: transparent;
+    background: rgba(255, 253, 253, 0.06);
+
+  }
+
+  
+  
