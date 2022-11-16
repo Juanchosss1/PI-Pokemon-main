@@ -53,7 +53,7 @@ const CreatePokemon = () => {
       if (!input.life) {
         errors.life = `You should enter a value in life to create a pokemon`;
       }
-    if (input.life.length ? input.life < 0 : (input.life = 0)) {
+    if (input.life.length ? input.life < 0 : (input.life === 0)) {
       errors.life = `Life must be greater than 0`;
     } else if (input.life > 999) {
       errors.life = `Life must be lesser than 1000`;
@@ -61,7 +61,7 @@ const CreatePokemon = () => {
     if (!input.attack) {
       errors.attack = `You should enter a value in attack to create a pokemon`;
     }
-    if (input.attack.length ? input.attack < 0 : (input.attack = 0)) {
+    if (input.attack.length ? input.attack < 0 : (input.attack === 0)) {
       errors.attack = `Attack must be greater than 0`;
     } else if (input.attack > 999) {
       errors.life = `Attack must be lesser than 1000`;
@@ -69,7 +69,7 @@ const CreatePokemon = () => {
     if (!input.defense) {
       errors.attack = `You should enter a value in defense to create a pokemon`;
     }
-    if (input.defense.length ? input.defense < 0 : (input.defense = 0)) {
+    if (input.defense.length ? input.defense < 0 : (input.defense === 0)) {
       errors.defense = `Defense must be greater than 0`;
     } else if (input.defense > 999) {
       errors.defense = `Defense must be lesser than 1000`;
@@ -156,16 +156,16 @@ const CreatePokemon = () => {
     }
   }
 
-  console.log(input);
-
+  
   return (
     <div>
       <NavLink to='/home'>
       <i className={styles.arrowLeft}></i>
       </NavLink>
-      CreatePokemon
+
 
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+      <h1>Create Pokemon</h1>
         <div>
           <label>Name: </label>
           <input
@@ -252,6 +252,8 @@ const CreatePokemon = () => {
           {types.length !== 0 ? (
             types.map((t) => {
               return (
+                
+                <div className={styles.container}>
                 <label key={t.id}>
                   <input
                     type="checkbox"
@@ -262,6 +264,8 @@ const CreatePokemon = () => {
 
                   {t.name}
                 </label>
+            </div>
+            
               );
             })
           ) : (
@@ -270,16 +274,12 @@ const CreatePokemon = () => {
         </div>
 
 
-        <button
-          type="submit"
+        <button         type="submit"
           disabled={Object.keys(errors).length > 0 || !input.name}
         >
-          Enviar!
+          <label  className={styles.send} >Send! </label>
         </button>
-      </form>
       <div className={styles.error}>
-        
-
       {errors.name && <p>{errors.name}</p>}
       {errors.img && <p>{errors.img}</p>}
       {errors.life && <p>{errors.life}</p>}
@@ -288,8 +288,8 @@ const CreatePokemon = () => {
       {errors.speed && <p>{errors.speed}</p>}
       {errors.height && <p>{errors.height}</p>}
       {errors.weight && <p>{errors.weight}</p>}
-        
-      </div>
+       </div>
+      </form>
     </div>
   );
 };
