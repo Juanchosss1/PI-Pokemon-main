@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { createPokemon, getAllPokemons, getTypes } from "../../redux/actions";
-import styles from '../CreatePokemon/CreatePokemon.module.css'
+import styles from "../CreatePokemon/CreatePokemon.module.css";
 function onlyLettersAndSpaces(str) {
   return /^[A-Za-z\s]*$/.test(str);
 }
@@ -50,10 +50,10 @@ const CreatePokemon = () => {
       if (pokemons.find((n) => n.name === input.name.toLowerCase())) {
         errors.name = `The name "${input.name}" it´s already used, try another one`;
       }
-      if (!input.life) {
-        errors.life = `You should enter a value in life to create a pokemon`;
-      }
-    if (input.life.length ? input.life < 0 : (input.life === 0)) {
+    if (!input.life) {
+      errors.life = `You should enter a value in life to create a pokemon`;
+    }
+    if (input.life.length ? input.life < 0 : input.life === 0) {
       errors.life = `Life must be greater than 0`;
     } else if (input.life > 999) {
       errors.life = `Life must be lesser than 1000`;
@@ -61,7 +61,7 @@ const CreatePokemon = () => {
     if (!input.attack) {
       errors.attack = `You should enter a value in attack to create a pokemon`;
     }
-    if (input.attack.length ? input.attack < 0 : (input.attack === 0)) {
+    if (input.attack.length ? input.attack < 0 : input.attack === 0) {
       errors.attack = `Attack must be greater than 0`;
     } else if (input.attack > 999) {
       errors.life = `Attack must be lesser than 1000`;
@@ -69,7 +69,7 @@ const CreatePokemon = () => {
     if (!input.defense) {
       errors.attack = `You should enter a value in defense to create a pokemon`;
     }
-    if (input.defense.length ? input.defense < 0 : (input.defense === 0)) {
+    if (input.defense.length ? input.defense < 0 : input.defense === 0) {
       errors.defense = `Defense must be greater than 0`;
     } else if (input.defense > 999) {
       errors.defense = `Defense must be lesser than 1000`;
@@ -156,16 +156,14 @@ const CreatePokemon = () => {
     }
   }
 
-  
   return (
     <div>
-      <NavLink to='/home'>
-      <i className={styles.arrowLeft}></i>
+      <NavLink to="/home">
+        <i className={styles.arrowLeft}></i>
       </NavLink>
 
-
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-      <h1>Create Pokemon</h1>
+        <h1>Create Pokemon</h1>
         <div>
           <label>Name: </label>
           <input
@@ -175,7 +173,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        
+
         <div>
           <label>Image: </label>
           <input
@@ -185,7 +183,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        
+
         <div>
           <label>Life: </label>
           <input
@@ -195,7 +193,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        
+
         <div>
           <label>Attack: </label>
           <input
@@ -205,7 +203,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        
+
         <div>
           <label>Defense: </label>
           <input
@@ -215,7 +213,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        
+
         <div>
           <label>Speed: </label>
           <input
@@ -225,7 +223,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-       
+
         <div>
           <label>Height: </label>
           <input
@@ -235,7 +233,7 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-      
+
         <div>
           <label>Weight: </label>
           <input
@@ -245,50 +243,52 @@ const CreatePokemon = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        
-        <div>
-          <label>Type: </label>
+        <div className={styles.container}>
+          <div className={styles.checkbox}>
+            <label>Type: </label>
 
-          {types.length !== 0 ? (
-            types.map((t) => {
-              return (
-                
-                <div className={styles.container}>
-                <label key={t.id}>
-                  <input
-                    type="checkbox"
-                    value={t.name}
-                    name={t.name}
-                    onChange={(e) => handleCheck(e)}
-                  />
+            {types.length !== 0 ? (
+              types.map((t) => {
+                return (
+                  <div>
+                    <label key={t.id}>
+                      <input
+                        type="checkbox"
+                        value={t.name}
+                        name={t.name}
+                        onChange={(e) => handleCheck(e)}
+                      />
 
-                  {t.name}
-                </label>
-            </div>
-            
-              );
-            })
-          ) : (
-            <option>Loading types</option>
-          )}
+                      {t.name}
+                    </label>
+                  </div>
+                );
+              })
+            ) : (
+              <option>Loading types</option>
+            )}
+          </div>
         </div>
-
-
-        <button         type="submit"
+        <button
+          type="submit"
           disabled={Object.keys(errors).length > 0 || !input.name}
         >
-          <label  className={styles.send} >Send! </label>
+          <label className={styles.send}>Send! </label>
         </button>
-      <div className={styles.error}>
-      {errors.name && <p>{errors.name}</p>}
-      {errors.img && <p>{errors.img}</p>}
-      {errors.life && <p>{errors.life}</p>}
-      {errors.attack && <p>{errors.attack}</p>}
-      {errors.defense && <p>{errors.defense}</p>}
-      {errors.speed && <p>{errors.speed}</p>}
-      {errors.height && <p>{errors.height}</p>}
-      {errors.weight && <p>{errors.weight}</p>}
-       </div>
+        <div className={styles.error}>
+          {errors.name && <p>{errors.name}</p>}
+          {errors.img && <p>{errors.img}</p>}
+          {errors.life && <p>{errors.life}</p>}
+          {errors.attack && <p>{errors.attack}</p>}
+          {errors.defense && <p>{errors.defense}</p>}
+          {errors.speed && <p>{errors.speed}</p>}
+          {errors.height && <p>{errors.height}</p>}
+          {errors.weight && <p>{errors.weight}</p>}
+        </div>
+        <br />
+        <a href="https://replicate.com/lambdal/text-to-pokemon" target="_blanc">
+          INSPIRATION
+        </a>
       </form>
     </div>
   );

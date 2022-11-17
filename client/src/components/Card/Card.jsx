@@ -9,7 +9,8 @@ const Card = ({ name, img, type, id }) => {
         <div className={`${type[0]}`}></div>
         <div className={`${type[1]}`}></div>
       </div>
-      <h1>{name.toUpperCase()}</h1>
+
+      <h1 className={styles.tittle}>{name.toUpperCase()}</h1>
 
       <img src={img} className={styles.imgsize} alt={`pokemon ${name}`} />
       <h5>

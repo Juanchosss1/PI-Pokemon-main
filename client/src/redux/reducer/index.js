@@ -9,6 +9,7 @@ import {
   SORT_BY_STORAGE,
   SORT_BY_TYPE,
   SORT_BY_ATTACK,
+  DELETE_POKEMON,
 } from "../actions/actionTypes";
 const initialState = {
   allPokemons: [],
@@ -108,6 +109,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allPokemons: sortByAttack,
+      };
+    }
+
+    case DELETE_POKEMON: {
+      return {
+        ...state,
       };
     }
 

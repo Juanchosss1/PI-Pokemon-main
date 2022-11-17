@@ -59,7 +59,6 @@ const Home = () => {
   function handleOrderAttack(e) {
     e.preventDefault();
     dispatch(sortByAttack(e.target.value));
-    console.log(e.target.value);
     setOrder(e.target.value);
     setCurrent(1);
   }
@@ -69,9 +68,9 @@ const Home = () => {
     dispatch(sortByType(e.target.value));
     setCurrent(1);
     setOrder(e.target.value);
+    console.log(order);
   }
 
-  console.log(currentPokemons);
   return (
     <div className={styles.background}>
       <div className={styles.container}>
@@ -86,18 +85,20 @@ const Home = () => {
         <div className={styles.header}>
           <div>
             <button>
-          <NavLink className={styles.link} to="/create">Create!</NavLink>
+              <NavLink className={styles.link} to="/create">
+                Create!
+              </NavLink>
             </button>
           </div>
           <div className={styles.searchbar}>
-          <SearchBar />
+            <SearchBar />
           </div>
         </div>
         <div className={styles.filters}>
-            <label>Sort alphabetically:</label>
-          <div >
+          <label>Sort alphabetically:</label>
+          <div>
             <select className={styles.options} onChange={(e) => handleOrder(e)}>
-              <option   value="asc">- A-Z</option>
+              <option value="asc">- A-Z</option>
               <option value="dsc">- Z-A</option>
             </select>
           </div>
@@ -116,7 +117,7 @@ const Home = () => {
               {allTypes &&
                 allTypes.map((e) => {
                   return (
-                    <option key={e.id} value={e.name}>
+                    <option key={e.name} value={e.name}>
                       - {e.name}
                     </option>
                   );
@@ -137,7 +138,11 @@ const Home = () => {
               return (
                 <div className={styles.card}>
                   <ul>
-                    <NavLink className={styles.link} key={c.id} to={"/Details/" + c.id}>
+                    <NavLink
+                      className={styles.link}
+                      key={c.id}
+                      to={"/Details/" + c.id}
+                    >
                       <Card
                         id={c.id}
                         name={c.name}
@@ -151,7 +156,11 @@ const Home = () => {
             })
           ) : (
             <div>
-              <img src={loadingHome} alt={"loading"} />
+              <img
+                className={styles.loadingsize}
+                src={loadingHome}
+                alt={"loading"}
+              />
               <p>Loading...</p>
             </div>
           )}

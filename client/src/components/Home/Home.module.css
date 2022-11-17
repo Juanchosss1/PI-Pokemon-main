@@ -9,22 +9,6 @@
   text-align: center;
   color: azure;
   flex-direction: column;
-  /* background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-image: linear-gradient(
-    210deg,
-    hsl(0deg 0% 0%) 0%,
-    hsl(60deg 17% 2%) 7%,
-    hsl(60deg 7% 4%) 19%,
-    hsl(60deg 4% 6%) 33%,
-    hsl(60deg 3% 8%) 46%,
-    hsl(60deg 2% 9%) 60%,
-    hsl(60deg 2% 10%) 72%,
-    hsl(60deg 2% 12%) 84%,
-    hsl(60deg 1% 13%) 94%,
-    hsl(60deg 1% 14%) 100%
-  ); */
   margin-bottom: -500px;
   font-family: "Bebas Neue", cursive;
 }
@@ -50,29 +34,29 @@
 .header {
   display: flex;
   flex-wrap: wrap;
-  }
+}
 
-  .searchbar{
-    align-self: flex-end;
-    padding-left: 20vh;
-    
-  }
+.searchbar {
+  align-self: flex-end;
+  padding-left: 20vh;
+}
 
-  .link{
-    text-decoration: none;
-  }
+.link {
+  text-decoration: none;
+}
 
-  .select option{
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: groove;
-    color: rgb(139, 139, 139);
-    backdrop-filter: blur(10px);
-    background-color: transparent;
-    background: rgba(255, 253, 253, 0.06);
+.select option {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  color: rgb(139, 139, 139);
+  backdrop-filter: blur(10px);
+  background-color: transparent;
+  background: rgba(255, 253, 253, 0.06);
+}
 
-  }
-
-  
-  
+.loadingsize {
+  height: 500px;
+  width: 500px;
+}

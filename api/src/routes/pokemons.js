@@ -74,17 +74,16 @@ router.post("/", async (req, res) => {
     res.status(400).send(err.message);
   }
 });
-/*
-router.get('/filtered', async(req, res)=>{
-  const {data} =req.query
-  if(data === "alphabeticalAsc"){
-    try{
-      let pokemonFilteredAsc=await pokemonFiltered(data)
-      res.status(200).json(pokemonFilteredAsc)
-    }catch(err){
-      res.status(400).json(err.message)
-    }
+
+router.delete("/:id", async (req, res) => {
+  try {
+    let { id } = req.params;
+    await Pokemons.destroy({
+      where: { id },
+    });
+    res.status(200).json(`Pokemon id: ${id} deleted`);
+  } catch (err) {
+    res.status(400).json(err.message);
   }
-})
-*/
+});
 module.exports = router;

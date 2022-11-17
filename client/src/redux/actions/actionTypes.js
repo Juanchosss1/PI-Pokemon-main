@@ -8,3 +8,4 @@ export const SORT_BY_NAME = "SORT_BY_NAME";
 export const SORT_BY_STORAGE = "SORT_BY_STORAGE";
 export const SORT_BY_TYPE = "SORT_BY_TYPE";
 export const SORT_BY_ATTACK = "SORT_BY_ATTACK";
+export const DELETE_POKEMON = "DELETE_POKEMON";

@@ -10,6 +10,7 @@ import {
   SORT_BY_STORAGE,
   SORT_BY_TYPE,
   SORT_BY_ATTACK,
+  DELETE_POKEMON,
 } from "./actionTypes";
 
 export function getAllPokemons() {
@@ -44,7 +45,7 @@ export function searchPokemon(value) {
       );
       let arr = [];
       arr.push(json.data);
-        return dispatch({
+      return dispatch({
         type: SEARCH_BY_NAME,
         payload: arr,
       });
@@ -87,10 +88,6 @@ export function createPokemon(payload) {
   };
 }
 
-
-
-
-
 export function sortByName(payload) {
   return {
     type: SORT_BY_NAME,
@@ -115,5 +112,19 @@ export function sortByAttack(payload) {
   return {
     type: SORT_BY_ATTACK,
     payload,
+  };
+}
+
+export function deletePokemon(value) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.delete(`http://localhost:3001/pokemons/${value}`);
+      return dispatch({
+        type: DELETE_POKEMON,
+        json,
+      });
+    } catch (err) {
+      window.alert(err.response.data);
+    }
   };
 }

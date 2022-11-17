@@ -14,13 +14,16 @@
   transition: all 0.3s;
   padding: 0.5rem;
   position: relative;
-  
 }
-.fire{
-color: rgb(248, 7, 7) !important;
-}
-.grass{
-color: rgb(7, 248, 27) !important;
+
+.tittle {
+  color: #f9f9f9;
+  font-size: 25px;
+  margin-top: -10px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  height: auto;
 }
 
 .card:hover {
