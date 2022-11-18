@@ -22,8 +22,6 @@ const CreatePokemon = () => {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
-  console.log(pokemons);
-
   const [input, setInput] = useState({
     name: "",
     life: "",
@@ -250,8 +248,8 @@ const CreatePokemon = () => {
             {types.length !== 0 ? (
               types.map((t) => {
                 return (
-                  <div>
-                    <label key={t.id}>
+                  <div key={t.id}>
+                    <label>
                       <input
                         type="checkbox"
                         value={t.name}

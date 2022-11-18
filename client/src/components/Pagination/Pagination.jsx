@@ -34,7 +34,7 @@ const Pagination = ({
           );
         })}
       {/*next*/}
-      {console.log(currentPage)}
+
       {pageNumbers && currentPage <= pageNumbers.length - 1 ? (
         <button
           className={styles.navigatenext}

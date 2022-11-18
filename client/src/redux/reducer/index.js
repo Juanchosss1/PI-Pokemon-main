@@ -1,6 +1,6 @@
 import {
   CLEAR_PAGE,
-  CREATE_POKEMON,
+  // CREATE_POKEMON,
   GET_ALL_POKEMONS,
   GET_DETAILS,
   GET_TYPES,
@@ -45,11 +45,11 @@ function rootReducer(state = initialState, action) {
         pokemonDetails: {},
       };
     }
-    case CREATE_POKEMON: {
-      return {
-        ...state,
-      };
-    }
+    // case CREATE_POKEMON: {
+    //   return {
+    //     ...state,
+    //   };
+    // }
     case GET_TYPES: {
       return {
         ...state,

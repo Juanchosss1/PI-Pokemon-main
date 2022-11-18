@@ -136,13 +136,9 @@ const Home = () => {
           {currentPokemons.length !== 0 ? (
             currentPokemons.map((c) => {
               return (
-                <div className={styles.card}>
+                <div key={c.id} className={styles.card}>
                   <ul>
-                    <NavLink
-                      className={styles.link}
-                      key={c.id}
-                      to={"/Details/" + c.id}
-                    >
+                    <NavLink className={styles.link} to={"/Details/" + c.id}>
                       <Card
                         id={c.id}
                         name={c.name}

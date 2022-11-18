@@ -3,7 +3,7 @@ import {
   GET_ALL_POKEMONS,
   SEARCH_BY_NAME,
   GET_DETAILS,
-  CREATE_POKEMON,
+  //CREATE_POKEMON,
   GET_TYPES,
   SORT_BY_NAME,
   CLEAR_PAGE,
@@ -59,7 +59,6 @@ export function getDetails(value) {
   return async function (dispatch) {
     try {
       let json = await axios.get(`http://localhost:3001/pokemons/${value}`);
-      console.log(json.data);
       return dispatch({
         type: GET_DETAILS,
         payload: json.data,
@@ -79,9 +78,7 @@ export function clearPage() {
 export function createPokemon(payload) {
   return async function (dispatch) {
     try {
-      await axios
-        .post(`http://localhost:3001/pokemons`, payload)
-        .then((json) => dispatch({ type: CREATE_POKEMON, payload: json }));
+      await axios.post(`http://localhost:3001/pokemons`, payload);
     } catch (err) {
       window.alert(err.response.data);
     }
