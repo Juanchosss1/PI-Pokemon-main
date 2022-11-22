@@ -45,11 +45,7 @@ function rootReducer(state = initialState, action) {
         pokemonDetails: {},
       };
     }
-    // case CREATE_POKEMON: {
-    //   return {
-    //     ...state,
-    //   };
-    // }
+
     case GET_TYPES: {
       return {
         ...state,

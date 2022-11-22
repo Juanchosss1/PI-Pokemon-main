@@ -20,6 +20,7 @@ const Pagination = ({
           onClick={() => pagination(currentPage - 1)}
         ></button>
       ) : null}
+
       {/*intermedium*/}
       {pageNumbers &&
         pageNumbers.map((n) => {
