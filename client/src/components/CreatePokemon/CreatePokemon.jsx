@@ -16,7 +16,7 @@ const CreatePokemon = () => {
   const history = useHistory();
   const types = useSelector((state) => state.types);
   const pokemons = useSelector((state) => state.allPokemons);
-
+  console.log(pokemons);
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getAllPokemons());

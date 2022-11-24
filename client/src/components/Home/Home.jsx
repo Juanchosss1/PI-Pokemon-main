@@ -43,6 +43,7 @@ const Home = () => {
     setOrder(e.target.value);
     dispatch(sortByName(e.target.value));
     setOrder(e.target.value);
+    console.log(order);
   }
   function handleClick(e) {
     e.preventDefault();
@@ -68,7 +69,6 @@ const Home = () => {
     dispatch(sortByType(e.target.value));
     setCurrent(1);
     setOrder(e.target.value);
-    console.log(order);
   }
 
   return (
@@ -141,6 +141,7 @@ const Home = () => {
                     <NavLink className={styles.link} to={"/Details/" + c.id}>
                       <Card
                         id={c.id}
+                        attack={c.attack}
                         name={c.name}
                         img={c.img}
                         type={c.types}

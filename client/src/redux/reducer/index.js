@@ -24,6 +24,7 @@ function rootReducer(state = initialState, action) {
     case GET_ALL_POKEMONS:
       return {
         ...state,
+
         allPokemonsFiltered: action.payload,
         allPokemons: action.payload,
       };

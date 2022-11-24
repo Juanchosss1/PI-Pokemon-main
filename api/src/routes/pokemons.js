@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { where } = require("sequelize");
 const { Pokemons } = require("../db.js");
 const Types = require("../models/Types.js");
 const {
@@ -28,7 +29,7 @@ router.get("/", async (req, res) => {
       let allPoke = await allPokemons();
       res.status(200).json(allPoke);
     } catch (err) {
-      err.message; //crear componente de error;
+      err.message;
     }
   }
 });
@@ -86,4 +87,5 @@ router.delete("/:id", async (req, res) => {
     res.status(400).json(err.message);
   }
 });
+
 module.exports = router;

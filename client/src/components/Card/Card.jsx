@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../Card/Card.module.css";
 import "./Card.css";
 
-const Card = ({ name, img, type, id }) => {
+const Card = ({ name, img, type, id, attack }) => {
   return (
     <div className={styles.card} key={id}>
       <div className="container">
@@ -21,6 +21,7 @@ const Card = ({ name, img, type, id }) => {
             : `${m.charAt(0).toUpperCase() + m.slice(1)} `
         )}
       </h5>
+      <h5>Attack: {attack}</h5>
     </div>
   );
 };

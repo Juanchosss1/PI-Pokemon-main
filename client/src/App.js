@@ -5,6 +5,10 @@ import Home from "./components/Home/Home";
 import Details from "./components/Details/Details";
 import CreatePokemon from "./components/CreatePokemon/CreatePokemon";
 import Error404 from "./components/Error404/Error404";
+import axios from "axios";
+
+//axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://piback-production.up.railway.app";
 
 function App() {
   return (
